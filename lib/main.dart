@@ -8,10 +8,14 @@ void main() {
 
   final emailInput = TdUiTextInput(TdUiTextInputType.email);
   emailInput.label = "Email";
+  emailInput.description =
+      "The day when the Thing should alarm. This will repeat according to the set frequency.";
   form.inputs["email"] = emailInput;
 
   final dateInput = TdUiTextInput(TdUiTextInputType.datetime);
   dateInput.label = "Data do alarme";
+  dateInput.description =
+      "The day when the Thing should alarm. This will repeat according to the set frequency.";
   form.inputs["date"] = dateInput;
 
   final stepperInput = TdUiNumberInput(NumberInputType.stepper);
@@ -19,14 +23,22 @@ void main() {
   stepperInput.min = 0;
   stepperInput.max = 10;
   stepperInput.unit = "un";
+  stepperInput.description =
+      "A counter that indicates de number of X in the Y Thing. Changing this will do Z and imply in A.";
   form.inputs["stepper"] = stepperInput;
 
   final dialInput = TdUiNumberInput(NumberInputType.dial);
-  dialInput.label = "Dial";
+  dialInput.label = "Temperature in your room";
   dialInput.min = 0;
   dialInput.max = 10;
   dialInput.unit = "ºC";
+  dialInput.description = "The aimed temperature. Please note that decreasing it will not speed up the freezing time";
   form.inputs["dial"] = dialInput;
+
+  final checkboxInput = TdUiBooleanInput(BooleanInputType.checkbox);
+  checkboxInput.label = "Checkbox";
+  checkboxInput.description = "The aimed temperature. Please note that decreasing it will not speed up the freezing time";
+  form.inputs["checkbox"] = checkboxInput;
 
   runApp(Provider.value(value: form, child: MyApp()));
 }
