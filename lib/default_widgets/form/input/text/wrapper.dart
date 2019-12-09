@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:td_driven_ui/default_widgets/form/index.dart';
-import 'package:td_driven_ui/default_widgets/form/input/mixins.dart';
 import 'package:td_driven_ui/default_widgets/form/input/text/specifier.dart';
-import 'package:td_driven_ui/thing_ui_models/interaction/inputs/text/index.dart';
 
 class TdUiTextInputWrapper extends StatefulWidget {
   const TdUiTextInputWrapper({Key key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => _TdUiTextInputWidget();
+  State<StatefulWidget> createState() => _TdUiTextInputWrapperState();
 }
 
-class _TdUiTextInputWidget extends State<TdUiTextInputWrapper>
-    with TdUiFormUpdater {
+class _TdUiTextInputWrapperState extends State<TdUiTextInputWrapper> {
   final controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    controller.addListener(() {
-      updateEditingValue(controller.text);
-    });
   }
 
   @override

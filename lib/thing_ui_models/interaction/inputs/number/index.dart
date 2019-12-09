@@ -7,5 +7,5 @@ class TdUiNumberInput extends TdUiInput {
   double max;
   String unit = "";
   final NumberInputType subType;
-  TdUiNumberInput(this.subType) : super(InputType.number, null);
+  TdUiNumberInput(this.subType) : super(InputType.number);
 }

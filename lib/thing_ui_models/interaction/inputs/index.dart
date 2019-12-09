@@ -4,17 +4,14 @@ abstract class TdUiInput {
   ///Unique ID
   String id;
 
+  String description = "";
+
   ///Label of this input that should be shown to the user.
   String label;
-
-  ///The value that is being modified by the user.
-  dynamic editingValue;
-  ///The most recent entry the Thing emmitted that is associated with this input.
-  final dynamic thingValue;
 
   bool interactionEnabled = true;
 
   final InputType type;
-  
-  TdUiInput(this.type, this.thingValue);
+
+  TdUiInput(this.type);
 }

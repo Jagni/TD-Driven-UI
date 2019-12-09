@@ -10,7 +10,7 @@ mixin TdUiFormUpdater<T extends StatefulWidget> on State<T> {
   ///Value: passed as parameter
   updateEditingValue(dynamic value) {
     var form = Provider.of<TdUiFormState>(context);
-    final key = widget.key as ValueKey<String>;
+    final key = Provider.of<ValueKey<String>>(context);
     form.updateEditingValue(key.value, value);
   }
 }
