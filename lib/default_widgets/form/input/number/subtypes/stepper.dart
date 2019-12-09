@@ -69,10 +69,20 @@ class _TdUiStepperNumberInputState extends State<TdUiStepperNumberInput>
           ),
           SizedBox(width: 16),
           Expanded(
-            child: Text(
-              value.toString(),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.display1.apply(color: Colors.black),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  value.toString(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.display1.apply(color: Colors.black),
+                ),
+                Text(
+                  input.unit,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ],
             ),
           ),
           SizedBox(width: 16),

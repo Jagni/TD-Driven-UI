@@ -6,10 +6,6 @@ import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
 void main() {
   final form = TdUiForm();
 
-  final titleInput = TdUiTextInput(TdUiTextInputType.multiline);
-  titleInput.label = "Título do alarme";
-  form.inputs["name"] = titleInput;
-
   final emailInput = TdUiTextInput(TdUiTextInputType.email);
   emailInput.label = "Email";
   form.inputs["email"] = emailInput;
@@ -19,10 +15,18 @@ void main() {
   form.inputs["date"] = dateInput;
 
   final stepperInput = TdUiNumberInput(NumberInputType.stepper);
-  stepperInput.label = "Numero";
+  stepperInput.label = "Stepper";
   stepperInput.min = 0;
   stepperInput.max = 10;
+  stepperInput.unit = "un";
   form.inputs["stepper"] = stepperInput;
+
+  final dialInput = TdUiNumberInput(NumberInputType.dial);
+  dialInput.label = "Dial";
+  dialInput.min = 0;
+  dialInput.max = 10;
+  dialInput.unit = "ºC";
+  form.inputs["dial"] = dialInput;
 
   runApp(Provider.value(value: form, child: MyApp()));
 }

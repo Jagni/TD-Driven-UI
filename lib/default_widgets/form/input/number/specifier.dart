@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:td_driven_ui/default_widgets/form/input/number/subtypes/dial.dart';
 import 'package:td_driven_ui/default_widgets/form/input/number/subtypes/stepper.dart';
 import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
 
@@ -20,6 +21,7 @@ class TdUiNumberInputSpecifier extends StatelessWidget {
     switch (input.subType) {
       case NumberInputType.dial:
         // TODO: Handle this case.
+        child = TdUiDialNumberInput();
         break;
       case NumberInputType.slider:
         // TODO: Handle this case.
