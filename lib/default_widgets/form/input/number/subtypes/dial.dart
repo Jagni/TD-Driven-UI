@@ -25,10 +25,14 @@ class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
   @override
   Widget build(BuildContext context) {
     final input = Provider.of<TdUiNumberInput>(context);
-
+    var label = input.label;
+    if (input.unit.isNotEmpty) {
+      label += " (" + input.unit + ")";
+    }
     return LayoutBuilder(
       builder: (context, constraints) {
         return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SleekCircularSlider(
               appearance: buildSliderAppearance(constraints),
@@ -39,36 +43,35 @@ class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(value.truncate().toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .display2
-                              .apply(color: Colors.black)),
-                      Text(input.unit,
-                          style: Theme.of(context)
-                              .textTheme
-                              .caption)
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Text(input.label,
-                      textAlign: TextAlign.center,
+                  Text(value.truncate().toString(),
                       style: Theme.of(context)
                           .textTheme
-                          .subtitle
-                          .apply(color: Colors.grey))
+                          .display2
+                          .apply(color: Colors.black)),
+                  SizedBox(height: 8),
+                  Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                        child: Text(label,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle
+                            .apply(color: Colors.grey)),
+                                      ),
+                  )
                 ],
               )),
-              onChange: (value) {},
+              onChangeEnd: didChangeValue,
             ),
           ],
         );
       },
     );
+  }
+
+  didChangeValue(double value) {
+    updateEditingValue(value);
   }
 
   CircularSliderAppearance buildSliderAppearance(BoxConstraints constraints) {
@@ -92,8 +95,8 @@ class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
         customWidths: customWidth01,
         customColors: customColors01,
         infoProperties: info,
-        startAngle: 140,
-        angleRange: 260,
-        size: constraints.maxWidth*0.65);
+        startAngle: 120,
+        angleRange: 300,
+        size: constraints.maxWidth * 0.65);
   }
 }
