@@ -4,5 +4,5 @@ import 'package:td_driven_ui/thing_ui_models/interaction/inputs/types.dart';
 
 class TdUiBooleanInput extends TdUiInput{
   final BooleanInputType subType;
-  TdUiBooleanInput(this.subType) : super(InputType.boolean, null);
+  TdUiBooleanInput(this.subType) : super(InputType.boolean);
 }

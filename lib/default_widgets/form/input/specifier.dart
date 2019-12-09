@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:td_driven_ui/default_widgets/form/input/boolean/index.dart';
+import 'package:td_driven_ui/default_widgets/form/input/boolean/wrapper.dart';
 import 'package:td_driven_ui/default_widgets/form/input/number/wrapper.dart';
 import 'package:td_driven_ui/default_widgets/form/input/text/wrapper.dart';
 import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
@@ -13,17 +13,16 @@ class TdUiWidgetSpecifier extends StatelessWidget {
 
   buildInput(BuildContext context) {
     final input = Provider.of<TdUiInput>(context);
-    final key = Provider.of<ValueKey<String>>(context);
     switch (input.type) {
       case InputType.text:
         if (input is TdUiTextInput) {
           return Provider<TdUiTextInput>.value(
-              value: input, child: TdUiTextInputWrapper(key: key));
+              value: input, child: TdUiTextInputWrapper());
         }
         break;
       case InputType.number:
         return Provider<TdUiNumberInput>.value(
-            child: TdUiNumberInputWrapper(), value: input);
+            value: input, child: TdUiNumberInputWrapper());
         break;
       case InputType.object:
         // TODO: Handle this case.
@@ -31,7 +30,7 @@ class TdUiWidgetSpecifier extends StatelessWidget {
       case InputType.boolean:
         if (input is TdUiBooleanInput) {
           return Provider<TdUiBooleanInput>.value(
-              value: input, child: TdUiBooleanInputWidget());
+              value: input, child: TdUiBooleanInputWrapper());
         }
     }
 

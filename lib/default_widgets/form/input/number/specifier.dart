@@ -13,7 +13,6 @@ class TdUiNumberInputSpecifier extends StatelessWidget {
 
   static Widget buildInput(BuildContext context) {
     final input = Provider.of<TdUiNumberInput>(context);
-    final key = Provider.of<ValueKey<String>>(context);
     //Default values
     var inputType = TextInputType.text;
     Widget child = TdUiStepperNumberInput();
