@@ -1,6 +1,6 @@
 import 'package:td_driven_ui/thing_ui_models/interaction/inputs/types.dart';
 
-abstract class Input {
+abstract class TdUiInput {
   ///Unique ID
   String id;
 
@@ -16,5 +16,5 @@ abstract class Input {
 
   final InputType type;
   
-  Input(this.type, this.thingValue);
+  TdUiInput(this.type, this.thingValue);
 }

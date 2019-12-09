@@ -1,7 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:td_driven_ui/default_widgets/form/index.dart';
+import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  final form = TdUiForm();
+
+  final titleInput = TdUiTextInput(TdUiTextInputType.multiline);
+  titleInput.label = "Título do alarme";
+  form.inputs["name"] = titleInput;
+
+  final emailInput = TdUiTextInput(TdUiTextInputType.email);
+  emailInput.label = "Email";
+  form.inputs["email"] = emailInput;
+
+  final dateInput = TdUiTextInput(TdUiTextInputType.datetime);
+  dateInput.label = "Data do alarme";
+  form.inputs["date"] = dateInput;
+
+  final stepperInput = TdUiNumberInput(NumberInputType.stepper);
+  stepperInput.label = "Numero";
+  stepperInput.min = 0;
+  stepperInput.max = 10;
+  form.inputs["stepper"] = stepperInput;
+
+  runApp(Provider.value(value: form, child: MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -21,7 +45,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: TdUiFormWidget(),
+      home: Scaffold(body: TdUiFormWidget()),
     );
   }
 }

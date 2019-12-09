@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:td_driven_ui/Actuator.dart';
-import 'package:td_driven_ui/default_widgets/form/input/factory.dart';
-import 'package:td_driven_ui/thing_ui_models/interaction/inputs/text/index.dart';
+import 'package:td_driven_ui/default_widgets/form/input/wrapper.dart';
 import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
 
 class TdUiFormWidget extends StatefulWidget {
@@ -11,14 +10,36 @@ class TdUiFormWidget extends StatefulWidget {
 }
 
 class TdUiFormWidgetState extends State<TdUiFormWidget> {
+  TdUiFormState formState;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    
-    return Provider.value(
-        value: this,
-        child: Column(
-          children: [],
-        ));
+    return Consumer<TdUiForm>(
+      builder: (BuildContext context, TdUiForm form, Widget child) {
+        final keys = form.inputs.keys;
+        formState = TdUiFormState(form);
+        return ChangeNotifierProvider(
+            create: (context) => TdUiFormState(form),
+            child: ListView.builder(
+                itemCount: keys.length,
+                itemBuilder: (context, index) {
+                  final key = keys.elementAt(index);
+                  final input = form.inputs[key];
+                  return MultiProvider(
+                    providers: [
+                      Provider.value(value: ValueKey(key)),
+                      Provider.value(value: input)
+                    ],
+                    child: TdUiInputWrapper(),
+                  );
+                }));
+      },
+    );
   }
 }
 
@@ -39,14 +60,18 @@ class TdUiFormState with ChangeNotifier {
       _editingValues[key] = value;
 
       if (!form.showsSubmitButton) {
-        //TODO: actuate immediately: await actuation then notify listeners
-        actuate({key: value});
+        //TODO: actuate immediately then notify listeners
+        _actuate({key: value});
         edited = false;
       }
     }
   }
 
-  Future<ActuationResponse> actuate(Map<String, dynamic> parameters) async {
+  submit() {
+    _actuate(_editingValues);
+  }
+
+  Future<ActuationResponse> _actuate(Map<String, dynamic> parameters) async {
     actuating = true;
     notifyListeners();
 
@@ -60,11 +85,14 @@ class TdUiFormState with ChangeNotifier {
   }
 
   ///Most recent value received from the associated Thng
+  final Map<String, dynamic> _thingValues = {};
   Map<String, dynamic> get thingValues {
-    return Map<String, dynamic>();
+    //TODO: watch new values and update map
+    return Map<String, dynamic>.unmodifiable(_thingValues);
   }
 
   ///Wether the user has modified any input after receiving the current ThingValues.
-  ///Used to enable the submit button and decide if an editing values should be updated.
+  ///
+  ///Used to enable the submit button and decide if an editing value should be updated.
   var edited = false;
 }
