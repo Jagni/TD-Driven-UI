@@ -21,17 +21,22 @@ dependencies:
     sdk: flutter
   equatable: ^0.6.1
   json_annotation: ^2.0.0
+  
+  #State
+  provider: ^3.2.0
 
+  #Date
   datetime_picker_formfield: 1.0.0-pre.5
   intl: ^0.16.0
 
+  #Stepper
   spring_button: ^1.0.13
 
+  #Dial
   sleek_circular_slider: ^1.0.7
 
-  provider: ^3.2.0
   tinycolor: ^1.0.2
-
+  
   #Actuation
   http: ^0.12.0+2
   http_auth: ^0.2.7
