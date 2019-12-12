@@ -37,8 +37,7 @@ class _TdUiStepperNumberInputState extends State<TdUiStepperNumberInput>
                         textAlign: TextAlign.center,
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle
-                            .apply(color: Colors.grey))),
+                            .subtitle)),
               ],
             ),
           ),
@@ -52,7 +51,7 @@ class _TdUiStepperNumberInputState extends State<TdUiStepperNumberInput>
                     padding: const EdgeInsets.all(stepperSize),
                     child: Icon(
                       Icons.remove,
-                      color: Colors.white,
+                      color: Theme.of(context).accentIconTheme.color,
                     ),
                   ),
                   decoration: BoxDecoration(
@@ -70,23 +69,12 @@ class _TdUiStepperNumberInputState extends State<TdUiStepperNumberInput>
               ),
               SizedBox(width: 16),
               Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      value.toString(),
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .display1
-                          .apply(color: Colors.black),
-                    ),
-                    Text(
-                      input.unit,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                  ],
+                child: Text(
+                  value.toString(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .display1,
                 ),
               ),
               SizedBox(width: 16),
@@ -97,7 +85,7 @@ class _TdUiStepperNumberInputState extends State<TdUiStepperNumberInput>
                     padding: const EdgeInsets.all(stepperSize),
                     child: Icon(
                       Icons.add,
-                      color: Colors.white,
+                      color: Theme.of(context).accentIconTheme.color,
                     ),
                   ),
                   decoration: BoxDecoration(

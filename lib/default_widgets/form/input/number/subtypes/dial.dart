@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'package:spring_button/spring_button.dart';
 import 'package:td_driven_ui/default_widgets/form/input/mixins.dart';
 import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
-import 'package:td_driven_ui/utils/color.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 class TdUiDialNumberInput extends StatefulWidget {
   @override
@@ -46,8 +45,7 @@ class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
                   Text(value.truncate().toString(),
                       style: Theme.of(context)
                           .textTheme
-                          .display2
-                          .apply(color: Colors.black)),
+                          .display2),
                   SizedBox(height: 8),
                   Flexible(
                                       child: Padding(
@@ -56,8 +54,7 @@ class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
                         textAlign: TextAlign.center,
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle
-                            .apply(color: Colors.grey)),
+                            .subtitle),
                                       ),
                   )
                 ],
@@ -76,20 +73,18 @@ class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
 
   CircularSliderAppearance buildSliderAppearance(BoxConstraints constraints) {
     final customWidth01 = CustomSliderWidths(
-        trackWidth: 20, progressBarWidth: 20, shadowWidth: 25);
+        trackWidth: 20, progressBarWidth: 20, shadowWidth: 25, handlerSize: 5);
     final customColors01 = CustomSliderColors(
-        dotColor: Colors.white.withOpacity(0.8),
-        trackColor: Colors.grey[300],
-        progressBarColors: List<Color>.generate(8, (index) {
-          return Colors.blue[index * 100 + 100];
-        }),
+        dotColor: Theme.of(context).scaffoldBackgroundColor,
+        trackColor: TinyColor(Theme.of(context).scaffoldBackgroundColor).darken().color,
+        progressBarColors: [Theme.of(context).accentColor, Theme.of(context).accentColor],
         shadowColor: Colors.black,
         shadowMaxOpacity: 0.08);
 
     final info = InfoProperties(
         modifier: (value) => value.truncate().toString(),
         mainLabelStyle:
-            Theme.of(context).textTheme.display3.apply(color: Colors.black));
+            Theme.of(context).textTheme.display3);
 
     return CircularSliderAppearance(
         customWidths: customWidth01,

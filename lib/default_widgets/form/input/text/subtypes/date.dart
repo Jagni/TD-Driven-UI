@@ -28,7 +28,6 @@ class _TdUiDateInputWidgetState extends State<TdUiDateInputWidget>
             updateEditingValue(DateFormat('dd/MM/yyyy').format(date)),
         decoration: InputDecoration(
           labelText: label,
-          fillColor: Colors.white,
         ),
         format: DateFormat('dd/MM/yyyy'),
         onShowPicker: (context, currentValue) {

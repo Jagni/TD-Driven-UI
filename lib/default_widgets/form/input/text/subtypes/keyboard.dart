@@ -36,13 +36,11 @@ class _TdUiKeyboardTextInputState extends State<TdUiKeyboardTextInput> with TdUi
     if (infoButton != null){
     return InputDecoration(
           labelText: label,
-          fillColor: Colors.white,
           suffix: infoButton
         );
     }
     return InputDecoration(
           labelText: label,
-          fillColor: Colors.white,
         );
   }
 }
