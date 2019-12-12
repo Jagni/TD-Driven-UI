@@ -7,8 +7,8 @@ class Thing {
   String icon;
   Uri baseUrl;
 
-  Map<String, Resource> properties;
-  Map<String, Resource> actions;
-  Map<String, Resource> events;
+  Map<String, Resource> properties = Map<String, Resource>();
+  Map<String, Resource> actions = Map<String, Resource>();
+  Map<String, Resource> events = Map<String, Resource>();
 
 }

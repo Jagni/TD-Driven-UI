@@ -5,7 +5,7 @@ import 'package:td_driven_ui/thing_ui_models/interaction/inputs/index.dart';
 
 class TdUiForm {
   var readOnly = false;
-  var showsSubmitButton = true;
+  var showsSubmitButton = false;
 
   ///Map that contains all inputs that this form must show.
   ///Key: Input's unique ID

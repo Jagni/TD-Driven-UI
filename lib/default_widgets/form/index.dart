@@ -23,21 +23,21 @@ class TdUiFormWidgetState extends State<TdUiFormWidget> {
       builder: (BuildContext context, TdUiForm form, Widget child) {
         final keys = form.inputs.keys;
         formState = TdUiFormState(form);
+
+        final children = keys.map((key) {
+          final input = form.inputs[key];
+          return MultiProvider(
+            providers: [
+              Provider.value(value: ValueKey(key)),
+              Provider.value(value: input)
+            ],
+            child: TdUiInputWrapper(),
+          );
+        }).toList();
+
         return ChangeNotifierProvider(
             create: (context) => TdUiFormState(form),
-            child: ListView.builder(
-                itemCount: keys.length,
-                itemBuilder: (context, index) {
-                  final key = keys.elementAt(index);
-                  final input = form.inputs[key];
-                  return MultiProvider(
-                    providers: [
-                      Provider.value(value: ValueKey(key)),
-                      Provider.value(value: input)
-                    ],
-                    child: TdUiInputWrapper(),
-                  );
-                }));
+            child: Column(children: children));
       },
     );
   }
@@ -60,7 +60,6 @@ class TdUiFormState with ChangeNotifier {
       _editingValues[key] = value;
 
       if (!form.showsSubmitButton) {
-        //TODO: actuate immediately then notify listeners
         _actuate({key: value});
         edited = false;
       }
