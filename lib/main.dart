@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:td_driven_ui/default_widgets/form/index.dart';
 import 'package:td_driven_ui/default_widgets/thing.dart';
 import 'package:td_driven_ui/thing_ui_models/actuation/actuator.dart';
 import 'package:td_driven_ui/thing_ui_models/actuation/communication_protocols.dart';
@@ -14,7 +13,7 @@ void main() {
   final thing = Thing();
   thing.baseUrl = Uri.parse("http://192.168.0.36/things/led");
 
-  final levelProperty = Resource();
+  final levelProperty = Property();
   levelProperty.name = "level";
   final levelForm = TdUiForm();
   final dialInput = TdUiNumberInput(NumberInputType.dial);
@@ -36,7 +35,7 @@ void main() {
   levelProperty.form = levelForm;
   thing.properties["level"] = levelProperty;
 
-  final limitTimeProperty = Resource();
+  final limitTimeProperty = Property();
   limitTimeProperty.name = "Limit time";
   final timeForm = TdUiForm();
   final stepperInput = TdUiNumberInput(NumberInputType.stepper);

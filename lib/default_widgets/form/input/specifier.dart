@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:td_driven_ui/default_widgets/form/input/boolean/wrapper.dart';
 import 'package:td_driven_ui/default_widgets/form/input/number/wrapper.dart';
 import 'package:td_driven_ui/default_widgets/form/input/text/wrapper.dart';
 import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
@@ -30,7 +29,7 @@ class TdUiWidgetSpecifier extends StatelessWidget {
       case InputType.boolean:
         if (input is TdUiBooleanInput) {
           return Provider<TdUiBooleanInput>.value(
-              value: input, child: TdUiBooleanInputWrapper());
+              value: input, child: TdUiNumberInputWrapper());
         }
     }
 

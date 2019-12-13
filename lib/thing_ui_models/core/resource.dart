@@ -6,3 +6,13 @@ class Resource {
   String icon;
   TdUiForm form;
 }
+
+class Property extends Resource {
+  bool isReadOnly;
+}
+
+class Action extends Resource {
+}
+
+class Event extends Resource {
+}
