@@ -1,80 +1,93 @@
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:td_driven_ui/default_widgets/thing.dart';
-import 'package:td_driven_ui/thing_ui_models/actuation/actuator.dart';
-import 'package:td_driven_ui/thing_ui_models/actuation/communication_protocols.dart';
-import 'package:td_driven_ui/thing_ui_models/actuation/security_schemes.dart';
-import 'package:td_driven_ui/thing_ui_models/core/resource.dart';
-import 'package:td_driven_ui/thing_ui_models/core/thing.dart';
-import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
-import 'package:td_driven_ui/utils/color.dart';
+import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
+import 'package:flutter/material.dart';
+import 'package:td_driven_ui/example_td.dart';
+import 'package:vector_math/vector_math_64.dart' as vector;
 
 void main() {
-  final thing = Thing();
-  thing.baseUrl = Uri.parse("http://192.168.0.36/things/led");
-
-  final levelProperty = Property();
-  levelProperty.name = "level";
-  final levelForm = TdUiForm();
-  final dialInput = TdUiNumberInput(NumberInputType.dial);
-  dialInput.label = "Level";
-  dialInput.min = 0;
-  dialInput.max = 100;
-  dialInput.unit = "%";
-  dialInput.description = "The level of light from 0-100 %";
-  levelForm.inputs["level"] = dialInput;
-
-  final levelActuation = TdUiActuation();
-  levelActuation.communicationProtocol = CommunicationProtocol.http;
-  levelActuation.securityScheme = SecurityScheme.none;
-  levelActuation.href =
-      Uri.parse("http://192.168.0.36/things/led/properties/level");
-
-  levelForm.actuation = levelActuation;
-
-  levelProperty.form = levelForm;
-  thing.properties["level"] = levelProperty;
-
-  final limitTimeProperty = Property();
-  limitTimeProperty.name = "Limit time";
-  final timeForm = TdUiForm();
-  final stepperInput = TdUiNumberInput(NumberInputType.stepper);
-  stepperInput.label = "Limit time";
-  stepperInput.min = 0;
-  stepperInput.max = 100;
-  stepperInput.unit = "min";
-  stepperInput.description = "How much time the lamp can stay turned on";
-  timeForm.inputs["limitTime"] = stepperInput;
-
-  final limitTimeActuation = TdUiActuation();
-  limitTimeActuation.communicationProtocol = CommunicationProtocol.http;
-  limitTimeActuation.securityScheme = SecurityScheme.none;
-  limitTimeActuation.href =
-      Uri.parse("http://192.168.0.36/things/led/properties/limitTime");
-
-  timeForm.actuation = limitTimeActuation;
-
-  limitTimeProperty.form = timeForm;
-  thing.properties["limitTime"] = limitTimeProperty;
-
-  runApp(Provider.value(value: thing, child: MyApp()));
+  runApp(Provider.value(value: ExampleTD.instance(), child: ARSample()));
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class ARSample extends StatefulWidget {
+  @override
+  _ARSampleState createState() => _ARSampleState();
+}
+
+class _ARSampleState extends State<ARSample> {
+  ArCoreController arCoreController;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          primaryColor: HexColor('#335F70'),
-          accentColor: HexColor('#0B7A75'),
-          scaffoldBackgroundColor: Colors.blueGrey[100]),
       home: Scaffold(
-          appBar: AppBar(
-            title: Text("smar2t"),
-          ),
-          body: TdUiThingWidget()),
+        appBar: AppBar(
+          title: const Text('Hello World'),
+        ),
+        body: ArCoreView(
+          onArCoreViewCreated: _onArCoreViewCreated,
+        ),
+      ),
     );
+  }
+
+  void _onArCoreViewCreated(ArCoreController controller) {
+    arCoreController = controller;
+
+    _addSphere(arCoreController);
+    _addCylindre(arCoreController);
+    _addCube(arCoreController);
+  }
+
+  void _addSphere(ArCoreController controller) {
+    final material = ArCoreMaterial(
+        color: Color.fromARGB(120, 66, 134, 244));
+    final sphere = ArCoreSphere(
+      materials: [material],
+      radius: 0.1,
+    );
+    final node = ArCoreNode(
+      shape: sphere,
+      position: vector.Vector3(0, 0, -1.5),
+    );
+    controller.addArCoreNode(node);
+  }
+
+  void _addCylindre(ArCoreController controller) {
+    final material = ArCoreMaterial(
+      color: Colors.red,
+      reflectance: 1.0,
+    );
+    final cylindre = ArCoreCylinder(
+      materials: [material],
+      radius: 0.5,
+      height: 0.3,
+    );
+    final node = ArCoreNode(
+      shape: cylindre,
+      position: vector.Vector3(0.0, -0.5, -2.0),
+    );
+    controller.addArCoreNode(node);
+  }
+
+  void _addCube(ArCoreController controller) {
+    final material = ArCoreMaterial(
+      color: Color.fromARGB(120, 66, 134, 244),
+      metallic: 1.0,
+    );
+    final cube = ArCoreCube(
+      materials: [material],
+      size: vector.Vector3(0.5, 0.5, 0.5),
+    );
+    final node = ArCoreNode(
+      shape: cube,
+      position: vector.Vector3(-0.5, 0.5, -3.5),
+    );
+    controller.addArCoreNode(node);
+  }
+
+  @override
+  void dispose() {
+    arCoreController.dispose();
+    super.dispose();
   }
 }

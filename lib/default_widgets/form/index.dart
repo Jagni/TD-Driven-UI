@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:td_driven_ui/Actuator.dart';
+import 'package:td_driven_ui/actuator.dart';
 import 'package:td_driven_ui/default_widgets/form/input/wrapper.dart';
 import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
 

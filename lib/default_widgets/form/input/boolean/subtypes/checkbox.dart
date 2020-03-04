@@ -53,7 +53,6 @@ class _TdUiCheckboxBooleanInputState extends State<TdUiCheckboxBooleanInput>
           ),
           Center(
                 child: Checkbox(
-                  visualDensity: VisualDensity.compact,
                   value: value,
                   onChanged: (value) => didTap(),
                 ),

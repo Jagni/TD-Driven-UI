@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "998620671092",
+    "firebase_url": "https://smar2t.firebaseio.com",
+    "project_id": "smar2t",
+    "storage_bucket": "smar2t.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998620671092:android:368aab15c8bcc154f1b521",
+        "android_client_info": {
+          "package_name": "jagni.smar2t"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998620671092-sout9p8rcrlhaillhsq327h6mms6ed2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNpwp1vRsVbOdMVZa5ZlR3zKg9fsp3H2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998620671092-sout9p8rcrlhaillhsq327h6mms6ed2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
