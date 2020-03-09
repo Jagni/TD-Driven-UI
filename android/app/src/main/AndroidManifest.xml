@@ -20,7 +20,6 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="td_driven_ui"
         android:icon="@mipmap/ic_launcher">
-        <meta-data android:name="com.google.ar.core" android:value="required" />
         <meta-data
     android:name="com.google.firebase.ml.vision.DEPENDENCIES"
     android:value="ocr" />
