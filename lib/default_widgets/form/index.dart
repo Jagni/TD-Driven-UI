@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:td_driven_ui/Actuator.dart';
 import 'package:td_driven_ui/default_widgets/form/input/wrapper.dart';
+import 'package:td_driven_ui/thing_ui_models/core/resource.dart';
 import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
 
 class TdUiFormWidget extends StatefulWidget {
@@ -13,19 +16,13 @@ class TdUiFormWidgetState extends State<TdUiFormWidget> {
   TdUiFormState formState;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Consumer<TdUiForm>(
-      builder: (BuildContext context, TdUiForm form, Widget child) {
-        final keys = form.inputs.keys;
-        formState = TdUiFormState(form);
+    return Consumer<Resource>(
+      builder: (BuildContext context, Resource resource, Widget child) {
+        final keys = resource.form.inputs.keys;
 
         final children = keys.map((key) {
-          final input = form.inputs[key];
+          final input = resource.form.inputs[key];
           return MultiProvider(
             providers: [
               Provider.value(value: ValueKey(key)),
@@ -36,7 +33,7 @@ class TdUiFormWidgetState extends State<TdUiFormWidget> {
         }).toList();
 
         return ChangeNotifierProvider(
-            create: (context) => TdUiFormState(form),
+            create: (context) => TdUiFormState(resource),
             child: Column(children: children));
       },
     );
@@ -44,8 +41,25 @@ class TdUiFormWidgetState extends State<TdUiFormWidget> {
 }
 
 class TdUiFormState with ChangeNotifier {
-  final TdUiForm form;
-  TdUiFormState(this.form);
+  Resource resource;
+  TdUiForm form;
+  Timer requestTimer;
+  TdUiFormState(Resource resource) {
+    this.form = resource.form;
+    this.resource = resource;
+    if (resource is Property) {
+      requestTimer = Timer.periodic(Duration(seconds: 5), (timer) {
+        _updateThingValues();
+      });
+    }
+  }
+
+  _updateThingValues() {
+    Actuator.get(resource.form.actuation).then((response) {
+      _thingValues.addAll(response);
+      notifyListeners();
+    });
+  }
 
   ///Wether an actuation is being made now
   var actuating = false;
@@ -56,13 +70,11 @@ class TdUiFormState with ChangeNotifier {
 
   updateEditingValue(String key, value) {
     edited = true;
-    if (!form.readOnly) {
-      _editingValues[key] = value;
+    _editingValues[key] = value;
 
-      if (!form.showsSubmitButton) {
-        _actuate({key: value});
-        edited = false;
-      }
+    if (!form.showsSubmitButton) {
+      _actuate({key: value});
+      edited = false;
     }
   }
 
@@ -86,7 +98,6 @@ class TdUiFormState with ChangeNotifier {
   ///Most recent value received from the associated Thng
   final Map<String, dynamic> _thingValues = {};
   Map<String, dynamic> get thingValues {
-    //TODO: watch new values and update map
     return Map<String, dynamic>.unmodifiable(_thingValues);
   }
 

@@ -14,16 +14,20 @@ class TdUiDateInputWidget extends StatefulWidget {
 
 class _TdUiDateInputWidgetState extends State<TdUiDateInputWidget>
     with TdUiFormUpdater {
+  
+  valueChanged(dynamic newValue) {
+    final controller = Provider.of<TextEditingController>(context);
+    controller.text = newValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<TextEditingController>(context);
-    final readOnly = Provider.of<TdUiFormState>(context).form.readOnly;
     final label = Provider.of<TdUiTextInput>(context).label;
 
     return DateTimeField(
         controller: controller,
         readOnly: true,
-        enabled: !readOnly,
         onChanged: (date) =>
             updateEditingValue(DateFormat('dd/MM/yyyy').format(date)),
         decoration: InputDecoration(

@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:td_driven_ui/default_widgets/form/index.dart';
-import 'package:td_driven_ui/default_widgets/form/input/wrapper.dart';
 import 'package:td_driven_ui/thing_ui_models/core/resource.dart';
 import 'package:td_driven_ui/thing_ui_models/core/thing.dart';
-import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
 
 class TdUiThingWidget extends StatefulWidget {
   @override
@@ -30,8 +28,8 @@ class TdUiThingWidgetState extends State<TdUiThingWidget> {
   buildResourceForm(Map<String, Resource> map) {
     final keys = map.keys;
     final children = keys.map((key) {
-      final property = map[key];
-      return Provider.value(value: property.form, child: TdUiFormWidget());
+      final resource = map[key];
+      return Provider.value(value: resource, child: TdUiFormWidget());
     }).toList();
     return Column(children: children);
   }

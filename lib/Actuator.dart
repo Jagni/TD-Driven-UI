@@ -8,15 +8,35 @@ class Actuator {
     var client = http.Client();
     try {
       // final parsedMap =
-          // parameters.map((key, value) => MapEntry(key, value.toString()));
+      // parameters.map((key, value) => MapEntry(key, value.toString()));
       final parsedMap = json.encode(parameters);
       var uriResponse = await client.put(actuation.href,
           headers: {"Content-Type": "application/json"}, body: parsedMap);
-      print(uriResponse.body);
-    } finally {
       client.close();
+      print(uriResponse.body);
+    } catch (e) {
+      client.close();
+      final response = ActuationResponse();
+      response.successful = false;
+      response.error = e.toString();
     }
     return ActuationResponse();
+  }
+
+  static Future<Map<String, dynamic>> get(
+      TdUiActuation actuation) async {
+    var client = http.Client();
+    try {
+      // final parsedMap =
+      // parameters.map((key, value) => MapEntry(key, value.toString()));
+      var uriResponse = await client.get(actuation.href);
+      client.close();
+      print(uriResponse.body);
+      return json.decode(uriResponse.body);
+    } catch (e) {
+      client.close();
+      return Map<String, dynamic>();
+    }
   }
 }
 

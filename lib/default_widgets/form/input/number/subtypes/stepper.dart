@@ -13,12 +13,8 @@ const stepperSize = 16.0;
 
 class _TdUiStepperNumberInputState extends State<TdUiStepperNumberInput>
     with TdUiFormUpdater {
-  var value = 0;
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
+  double defaultValue = 0.0;
+  
   @override
   Widget build(BuildContext context) {
     final input = Provider.of<TdUiNumberInput>(context);
@@ -70,7 +66,7 @@ class _TdUiStepperNumberInputState extends State<TdUiStepperNumberInput>
               SizedBox(width: 16),
               Expanded(
                 child: Text(
-                  value.toString(),
+                  value == null ? defaultValue.toString() : value.toString(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme

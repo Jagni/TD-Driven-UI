@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:td_driven_ui/default_widgets/form/index.dart';
 import 'package:td_driven_ui/default_widgets/form/input/mixins.dart';
 import 'package:td_driven_ui/thing_ui_models/thing_ui_models.dart';
 import 'package:tinycolor/tinycolor.dart';
 
 class TdUiDialNumberInput extends StatefulWidget {
+  final ValueKey<String> dialKey = ValueKey<String>("dial");
   @override
   State<StatefulWidget> createState() => _TdUiDialNumberInputState();
 }
@@ -14,11 +16,18 @@ const DialSize = 16.0;
 
 class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
     with TdUiFormUpdater {
-  var value = 0;
+  double defaultValue = 0.0;
+  
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    value = Provider.of<int>(context);
+    final key = Provider.of<ValueKey<String>>(context);
+    final formState = Provider.of<TdUiFormState>(context);
+    if (formState.thingValues.containsKey(key.value)){
+      setState(() {
+        value = formState.thingValues[key.value];
+      });
+    }
   }
 
   @override
@@ -26,7 +35,7 @@ class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
     final input = Provider.of<TdUiNumberInput>(context);
     var label = input.label;
     if (input.unit.isNotEmpty) {
-      label += " (" + input.unit + ")";
+      label = " (" + input.unit + ")";
     }
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -35,7 +44,7 @@ class _TdUiDialNumberInputState extends State<TdUiDialNumberInput>
           children: <Widget>[
             SleekCircularSlider(
               appearance: buildSliderAppearance(constraints),
-              initialValue: 0,
+              initialValue: value == null ? defaultValue : value + .0,
               min: input.min,
               max: input.max,
               innerWidget: (value) => Center(
