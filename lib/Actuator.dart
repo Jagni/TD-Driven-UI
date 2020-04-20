@@ -27,8 +27,6 @@ class Actuator {
       TdUiActuation actuation) async {
     var client = http.Client();
     try {
-      // final parsedMap =
-      // parameters.map((key, value) => MapEntry(key, value.toString()));
       var uriResponse = await client.get(actuation.href);
       client.close();
       print(uriResponse.body);
