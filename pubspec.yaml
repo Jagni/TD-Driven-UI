@@ -23,23 +23,23 @@ dependencies:
   json_annotation: ^2.0.0
   
   #State
-  provider: ^3.2.0
+  provider: ^4.3.1
 
   #Date
-  datetime_picker_formfield: 1.0.0-pre.5
-  intl: ^0.16.0
+  datetime_picker_formfield: ^1.0.0
+  intl: ^0.16.1
 
   #Stepper
   spring_button: ^1.0.13
 
   #Dial
-  sleek_circular_slider: ^1.0.7
+  sleek_circular_slider: ^1.1.0
 
   tinycolor: ^1.0.2
 
   #Actuation
-  http: ^0.12.0+2
-  http_auth: ^0.2.7
+  http: ^0.12.1
+  http_auth: ^0.2.9
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

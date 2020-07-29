@@ -1,0 +1,3 @@
+class TmrResource {
+  dynamic currentValue;
+}
