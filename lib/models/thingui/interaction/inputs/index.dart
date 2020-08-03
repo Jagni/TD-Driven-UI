@@ -13,5 +13,5 @@ abstract class ThingUiInput {
   String unit;
 
   String type;
-  String contextualType;
+  String semanticType;
 }

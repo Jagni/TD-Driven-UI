@@ -1,6 +1,6 @@
 import 'package:td_driven_ui/models/thingui/core/resource.dart';
 
-class ThingUiThing {
+class ThingUI {
   String name;
   String description;
   String icon;

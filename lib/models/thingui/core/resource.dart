@@ -11,7 +11,7 @@ class ThingUiResource {
   Map<String, ThingUiInput> inputs = Map<String, ThingUiInput>();
   ThingUiActuation actuation = ThingUiActuation();
   String type;
-  String contextualType;
+  String semanticType;
 
   get showsSubmitButton {
     return type != "property";
