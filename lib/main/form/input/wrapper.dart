@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:td_driven_ui/custom_inputs/index.dart';
-import 'package:td_driven_ui/custom_inputs/number/stepper.dart';
 import 'package:td_driven_ui/main/form/input/types/number.dart';
 import 'package:td_driven_ui/main/form/input/types/text.dart';
 import 'package:td_driven_ui/models/thingui/index.dart';
-import 'package:td_driven_ui/utils/info_dialog.dart';
 
 class InputWrapper extends StatelessWidget {
   @override

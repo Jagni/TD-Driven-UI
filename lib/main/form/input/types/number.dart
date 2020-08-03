@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:td_driven_ui/main/form/input/mixins.dart';
 import 'package:td_driven_ui/models/thingui/index.dart';
-import 'package:td_driven_ui/utils/info_dialog.dart';
 
 class ThingUiNumberInput extends StatefulWidget {
   @override

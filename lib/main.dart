@@ -4,12 +4,12 @@ import 'package:td_driven_ui/main/dashboard.dart';
 import 'package:td_driven_ui/utils/color.dart';
 
 import 'example/customInputFunction.dart';
-import 'example/esp32Thing.dart';
+import 'example/esp32ThingUI.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     Provider.value(value: exampleCustomInputFunction),
-    Provider.value(value: esp32Thing())
+    Provider.value(value: esp32ThingUI())
   ], child: MyApp()));
 }
 

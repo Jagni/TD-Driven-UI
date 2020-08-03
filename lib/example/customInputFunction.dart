@@ -5,10 +5,10 @@ import 'package:td_driven_ui/models/thingui/index.dart';
 
 CustomInputFunction exampleCustomInputFunction =
     (ThingUiResource resource, ThingUiInput input) {
-  if (input.contextualType == "LevelProperty") {
+  if (input.semanticType == "LevelProperty") {
     return TdUiDialNumberInput();
   }
-  if (input.contextualType == "LimitTime") {
+  if (input.semanticType == "LimitTime") {
     return TdUiStepperNumberInput();
   }
   return null;

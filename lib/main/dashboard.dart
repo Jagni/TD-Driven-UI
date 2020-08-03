@@ -12,8 +12,8 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThingUiThing>(
-      builder: (BuildContext context, ThingUiThing thing, Widget child) {
+    return Consumer<ThingUI>(
+      builder: (BuildContext context, ThingUI thing, Widget child) {
         return SingleChildScrollView(
           child: Column(children: [
             buildResourceForm(thing.properties),

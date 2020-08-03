@@ -1,9 +1,9 @@
 import 'package:td_driven_ui/models/thingui/actuation/index.dart';
 import 'package:td_driven_ui/models/thingui/index.dart';
 
-ThingUiThing esp32Thing() {
-  final thing = ThingUiThing();
-  thing.baseUrl = Uri.parse("http://192.168.0.36/things/led");
+ThingUI esp32ThingUI() {
+  final thingUI = ThingUI();
+  thingUI.baseUrl = Uri.parse("http://192.168.0.36/things/led");
 
   final levelProperty = ThingUiResource();
   levelProperty.name = "Level";
@@ -15,7 +15,7 @@ ThingUiThing esp32Thing() {
   levelInput.max = 100;
   levelInput.unit = "%";
   levelInput.type = "number";
-  levelInput.contextualType = "LevelProperty";
+  levelInput.semanticType = "LevelProperty";
 
   levelProperty.inputs["level"] = levelInput;
 
@@ -27,7 +27,7 @@ ThingUiThing esp32Thing() {
 
   levelProperty.actuation = levelActuation;
 
-  thing.properties["level"] = levelProperty;
+  thingUI.properties["level"] = levelProperty;
 
   final limitTimeProperty = ThingUiResource();
   limitTimeProperty.name = "Limit time";
@@ -39,7 +39,7 @@ ThingUiThing esp32Thing() {
   limitTimeInput.max = 100;
   limitTimeInput.unit = "min";
   limitTimeInput.type = "number";
-  limitTimeInput.contextualType = "LimitTime";
+  limitTimeInput.semanticType = "LimitTime";
   limitTimeProperty.inputs["limitTime"] = limitTimeInput;
 
   final limitTimeActuation = ThingUiActuation();
@@ -50,6 +50,6 @@ ThingUiThing esp32Thing() {
 
   limitTimeProperty.actuation = limitTimeActuation;
 
-  thing.properties["limitTime"] = limitTimeProperty;
-  return thing;
+  thingUI.properties["limitTime"] = limitTimeProperty;
+  return thingUI;
 }
